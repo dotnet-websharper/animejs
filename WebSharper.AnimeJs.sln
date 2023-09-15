@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.AnimeJs", "WebSharper.AnimeJs\WebSharper.AnimeJs.fsproj", "{EAE7D8C4-54F1-4157-B4D8-1B2999239CDD}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.AnimeJs.Sample", "WebSharper.AnimeJs.Sample\WebSharper.AnimeJs.Sample.fsproj", "{3DF42496-7B00-4C64-BF1B-40EF9CCCD4F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAE7D8C4-54F1-4157-B4D8-1B2999239CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAE7D8C4-54F1-4157-B4D8-1B2999239CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAE7D8C4-54F1-4157-B4D8-1B2999239CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAE7D8C4-54F1-4157-B4D8-1B2999239CDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF42496-7B00-4C64-BF1B-40EF9CCCD4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF42496-7B00-4C64-BF1B-40EF9CCCD4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF42496-7B00-4C64-BF1B-40EF9CCCD4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF42496-7B00-4C64-BF1B-40EF9CCCD4F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

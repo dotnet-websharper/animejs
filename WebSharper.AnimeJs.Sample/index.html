@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WebSharper.AnimeJs Sample Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="Content/WebSharper.AnimeJs.Sample.css" />
+    <style>
+        /* Don't show the not-yet-loaded templates */
+        [ws-template], [ws-children-template] { display: none; }
+        .box {
+            background-color: #000000; 
+            margin: 1px; 
+            font-size: 14px; 
+            width:20px; 
+            height:20px; 
+            position: relative;
+        }
+    </style>
+    <script type="module" src="Content/WebSharper.AnimeJs.Sample.head.js"></script>
+</head>
+<body>
+<!--<h1>WebSharper.AnimeJs Sample Page</h1>-->
+<!--<h2>Note: Translate works on local axis</h2>-->
+<div id="demo1">
+    <div id="box1" class="box"></div>
+</div>
+<div id="main">
+</div>
+<script type="module" src="Content/WebSharper.AnimeJs.Sample.js"></script>
+</body>
+</html>
+
