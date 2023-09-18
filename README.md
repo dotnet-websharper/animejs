@@ -1,4 +1,4 @@
-# WebSharper.JsPDF
+# WebSharper.AnimeJS
 
 WebSharper bindings for AnimeJs 3.2.1
 
