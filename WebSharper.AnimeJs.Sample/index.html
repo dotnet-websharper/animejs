@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="Content/WebSharper.AnimeJs.Sample.css" />
+    <link rel="stylesheet" type="text/css" href="svgboxopen.css" />
+    <link rel="stylesheet" type="text/css" href="svgmenu.css" />
     <style>
         /* Don't show the not-yet-loaded templates */
         [ws-template], [ws-children-template] { display: none; }
@@ -16,18 +18,23 @@
             height:20px; 
             position: relative;
         }
+
     </style>
     <script type="module" src="Content/WebSharper.AnimeJs.Sample.head.js"></script>
 </head>
 <body>
-<!--<h1>WebSharper.AnimeJs Sample Page</h1>-->
-<!--<h2>Note: Translate works on local axis</h2>-->
-<div id="demo1">
-    <div id="box1" class="box"></div>
-</div>
-<div id="main">
-</div>
-<script type="module" src="Content/WebSharper.AnimeJs.Sample.js"></script>
+    <!--<h1>WebSharper.AnimeJs Sample Page</h1>-->
+    <!--<h2>Note: Translate works on local axis</h2>-->
+    
+    <div id="main">
+    </div>
+    <div id="demo1">
+        <div id="box1" class="box"></div>
+        <svg>
+            <polygon id="box2" stroke="black" fill="red" transform="translate(50,0)" points="0,0 0,5 5,5 5,0"></polygon>
+        </svg>
+    </div>
+    <script type="module" src="Content/WebSharper.AnimeJs.Sample.js"></script>
 </body>
 </html>
 

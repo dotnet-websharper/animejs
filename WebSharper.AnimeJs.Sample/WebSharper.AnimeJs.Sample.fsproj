@@ -9,8 +9,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+		<None Include="vite.config.js" />
+		<Content Include="index.html" />
+		<Content Include="svgmenu.html" />
+		<Compile Include="Components/SVGMenu.fs" />
         <Compile Include="Client.fs" />
-<!--        <Content Include="index.html" />-->
+	    
     </ItemGroup>
 
     <ItemGroup>
@@ -19,6 +23,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\WebSharper.AnimeJs\WebSharper.AnimeJs.fsproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Components\" />
     </ItemGroup>
     <Import Project="..\paket-files\wsbuild\github.com\dotnet-websharper\build-script\WebSharper.Fake.targets" Condition="Exists('..\paket-files\wsbuild\github.com\dotnet-websharper\build-script\WebSharper.Fake.targets')" />
     <Import Project="..\.paket\Paket.Restore.targets" />

@@ -8,6 +8,7 @@ module Definition =
     
     let Anime =
         Class "Anime"
+        |> ImportDefault "animejs/lib/anime.es.js"
         
     let Tween =
         Class "Tween"
@@ -372,17 +373,34 @@ module Definition =
         "easeOutInBounce"
     ]
     
-    let CubicEasing = Method "Easing.Cubic" (T<float> * T<float> * T<float> * T<float> ^-> T<unit>)
-                      |> WithInline "'cubicBezier($a,$b,$c,$d)'"
-    let SpringEasing = Method "Easing.Spring" (T<float>?mass * T<float>?stiffness * T<float>?damping * T<float>?velocity ^-> T<unit>)
-                       |> WithInline "'spring($mass,$stiffness,$damping,$velocity)'"
-    let ElasticEasingType = Pattern.EnumStrings "Easing.ElasticEasingType" [
-        "elasticIn";"elasticOut";"elasticInOut";"elasticOutIn"
+    let ElasticEasingType = Pattern.EnumStrings "Easing.ElasticEasingType" [for n in ["In";"Out";"InOut";"OutIn"] -> $"ease{n}Elastic"]
+
+               
+    Easing
+    |+> Static [
+        "Cubic" => T<float>?x1 * T<float>?y1 * T<float>?x2 * T<float>?y2 ^-> TSelf
+                      |> WithInline """{
+                            var x1=$x1; var x2=$x2; var y1=$y1; var y2=$y2;
+                            return 'cubicBezier(' + x1 + ',' + y1 + ',' + x2 + ',' + y2 + ')';
+                      }"""
+        "Spring" => T<float>?mass * T<float>?stiffness * T<float>?damping * T<float>?velocity ^-> TSelf
+                       |> WithInline """{
+                            var m=$mass; var s=$stiffness; var d=$damping; var v=$velocity;
+                            return 'spring('+m+','+s+','+d+','+v+')';
+                       }"""
+        "Elastic" => ElasticEasingType?elasticType * T<float>?amplitude * T<float>?period ^-> TSelf
+                        |> WithInline """{
+                            var e=$elasticType; var a=$amplitude; var p=$period;
+                            return e+'('+a+','+p+')';
+                        }"""
+        "Step" => T<int>?steps ^-> TSelf
+                    |> WithInline """{
+                        var s=$steps;
+                        return 'steps('+s+')';
+                    }"""
+
     ]
-    let ElasticEasing = Method "Easing.Elastic" (T<float>?amplitude * T<float>?period * ElasticEasingType?elasticType ^-> T<unit>)
-                        |> WithInline "'$elasticType($amplitude,$period)'"
-    let StepEasing = Method "Easing.Steps" (T<int>?steps ^-> T<unit>)
-                    |> WithInline "'steps($steps)'"
+    |> ignore
     
     let StaggerDirection = Pattern.EnumStrings "StaggerDirection" [
         "normal"
@@ -440,6 +458,11 @@ module Definition =
     
     
     let targetType = T<string> + T<JavaScript.Dom.Node> + T<obj>
+    let PathValues = 
+        Class "PathValues"
+        |+> Static [
+            ObjectConstructor (T<string> + (!|T<string>))?value
+        ]
     let commonParams = [
                 let functionBased = targetType?target * (!?T<int>)?index * (!?T<int>)?targetsLength ^-> T<int>
                 let numericParam = T<int> + Stagger.Type + functionBased
@@ -448,7 +471,7 @@ module Definition =
                     n, numericParam
                 for n in cssProperties do
                     n, numericParam 
-                "easing", Easing + CubicEasing.Type + SpringEasing.Type + ElasticEasing.Type + StepEasing.Type 
+                "easing", Easing.Type
                 "round", T<int>
                 // animation params
                 "direction", Direction.Type
@@ -460,7 +483,8 @@ module Definition =
                 for n in transforms do
                     n, transformParam + Keyframes
                 //svg
-                "points", T<string>
+                "points", T<string> + !|(T<float>*T<float>) + PathValues.Type
+                "d", PathValues.Type
                 "baseFrequency", T<float>
                 "strokeDashOffset", T<string>*T<float> // todo
                 
@@ -489,8 +513,9 @@ module Definition =
     
     Anime
     |+> Static [
-        "Anime" => AnimeParams?options ^-> TSelf
-        |> ImportDefault "animejs/lib/anime.es.js"
+        Constructor AnimeParams?options
+        //"Anime" => AnimeParams?options ^-> TSelf
+        //|> ImportDefault "animejs/lib/anime.es.js"
     ]
     |+> Instance [
         "reverse" => T<unit> ^-> T<unit>
@@ -501,9 +526,9 @@ module Definition =
     let Timeline =
         Class "Timeline"
         |=> Inherits Animation
-        |+> Static [
-            Constructor (!?TimelineParams)?parameters
-        ]
+        //|+> Static [
+        //    Constructor (!?TimelineParams)?parameters
+        //]
         |+> Instance [
             "add" => TimelineParams?parameters * (!?(T<int> + T<string>))?timeOffset ^-> TSelf
         ]
@@ -535,10 +560,12 @@ module Definition =
                 PropertyParameter
                 FromValue
                 Axis
+                ElasticEasingType
                 Easing
                 StaggerOptions
                 
                 PathOptions
+                PathValues
                 
                 TimelineParams
                 Timeline
