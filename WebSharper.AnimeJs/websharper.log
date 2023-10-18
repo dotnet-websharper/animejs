@@ -1,0 +1,10 @@
+2023-10-18 09:06:49.9905|DEBUG|Program|location of wsfscservice is: C:\Users\runneradmin\.nuget\packages\websharper.fsharp\7.0.2.347-beta2\tools\net6.0\win-x64 (server side)
+2023-10-18 09:06:50.0137|DEBUG|Program|pipename is: C:\Users\runneradmin\.nuget\packages\websharper.fsharp\7.0.2.347-beta2\tools\net6.0\win-x64 (server side)
+2023-10-18 09:06:50.0137|DEBUG|Program|Compiling D:\a\build-script\build-script\animejs\WebSharper.AnimeJs\WebSharper.AnimeJs.fsproj
+2023-10-18 09:06:55.1749|TRACE|Program|Server sends: n: F# compilation: 00:00:05.2397436
+2023-10-18 09:06:55.2656|TRACE|Program|Server sends: n: Loading IExtension implementation: 00:00:00.0945239
+2023-10-18 09:06:55.3162|TRACE|Program|Server sends: n: Getting Assembly definition: 00:00:00.0506240
+2023-10-18 09:06:55.7334|TRACE|Program|Server sends: n: Built assembly: 00:00:00.4172372
+2023-10-18 09:06:56.2937|TRACE|Program|Server sends: n: Creating WebSharper metadata: 00:00:00.5603055
+2023-10-18 09:06:56.4265|TRACE|Program|Server sends: n: Writing final dll: 00:00:00.1327651
+2023-10-18 09:06:56.4265|TRACE|Program|Server sends: x: 0

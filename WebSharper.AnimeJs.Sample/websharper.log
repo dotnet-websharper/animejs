@@ -1,0 +1,24 @@
+2023-10-18 09:06:56.9480|DEBUG|Program|location of wsfscservice is: C:\Users\runneradmin\.nuget\packages\websharper.fsharp\7.0.2.347-beta2\tools\net6.0\win-x64 (server side)
+2023-10-18 09:06:56.9480|DEBUG|Program|pipename is: C:\Users\runneradmin\.nuget\packages\websharper.fsharp\7.0.2.347-beta2\tools\net6.0\win-x64 (server side)
+2023-10-18 09:06:56.9480|DEBUG|Program|Compiling D:\a\build-script\build-script\animejs\WebSharper.AnimeJs.Sample\WebSharper.AnimeJs.Sample.fsproj
+2023-10-18 09:06:56.9480|TRACE|Program|Server sends: e: WebSharper warning WS9002: Please use "spa" instead of "Bundle" for your project type
+2023-10-18 09:06:59.0577|TRACE|Program|Server sends: n: F# compilation: 00:00:02.1128234
+2023-10-18 09:07:00.4071|TRACE|Program|Server sends: n: Checking project: 00:00:01.3494176
+2023-10-18 09:07:00.4071|TRACE|Program|Server sends: n: Waiting on merged metadata: 00:00:00.0014055
+2023-10-18 09:07:00.8347|TRACE|Program|Server sends: n: Parsing with FCS: 00:00:00.4262075
+2023-10-18 09:07:00.8385|TRACE|Program|Server sends: n: Analyzing function arguments: 00:00:00.0037950
+2023-10-18 09:07:00.9135|TRACE|Program|Server sends: n: Resolving names: 00:00:00.0750328
+2023-10-18 09:07:01.1733|TRACE|Program|Server sends: n: WebSharper translation: 00:00:00.2597576
+2023-10-18 09:07:01.2010|TRACE|Program|Server sends: n: Source position transformations: 00:00:00.0276915
+2023-10-18 09:07:01.2651|TRACE|Program|Server sends: n: Packaging assembly: 00:00:00.0640936
+2023-10-18 09:07:01.4060|TRACE|Program|Server sends: n: Writing WebSharper.AnimeJs.Sample.Components.SVGMenu.Paths.js: 00:00:00.1408842
+2023-10-18 09:07:01.4060|TRACE|Program|Server sends: n: Writing WebSharper.AnimeJs.Sample.Components.SVGMenu.js: 00:00:00.0007551
+2023-10-18 09:07:01.4060|TRACE|Program|Server sends: n: Writing WebSharper.AnimeJs.Sample.Client.js: 00:00:00.0003888
+2023-10-18 09:07:01.4060|TRACE|Program|Server sends: n: Writing $Generated.js: 00:00:00.0006200
+2023-10-18 09:07:01.4060|TRACE|Program|Server sends: n: Writing $EntryPoint.js: 00:00:00.0002994
+2023-10-18 09:07:01.4409|TRACE|Program|Server sends: n: Writing .d.ts files: 00:00:00.0329187
+2023-10-18 09:07:01.4409|TRACE|Program|Server sends: n: Hashing resources: 00:00:00.0035776
+2023-10-18 09:07:01.6109|TRACE|Program|Server sends: n: Serializing metadata: 00:00:00.1663973
+2023-10-18 09:07:01.6706|TRACE|Program|Server sends: n: Writing resources into assembly: 00:00:00.0597019
+2023-10-18 09:07:02.0032|TRACE|Program|Server sends: n: Bundling: 00:00:00.3325453
+2023-10-18 09:07:02.0032|TRACE|Program|Server sends: x: 0
