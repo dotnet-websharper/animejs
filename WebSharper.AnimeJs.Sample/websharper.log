@@ -1,24 +1,24 @@
-2023-11-23 16:48:11.2358|DEBUG|Program|location of wsfscservice is: C:\Users\runneradmin\.nuget\packages\websharper.fsharp\7.0.5.377-beta3\tools\net6.0\win-x64 (server side)
-2023-11-23 16:48:11.2358|DEBUG|Program|pipename is: C:\Users\runneradmin\.nuget\packages\websharper.fsharp\7.0.5.377-beta3\tools\net6.0\win-x64 (server side)
-2023-11-23 16:48:11.2358|DEBUG|Program|Compiling D:\a\build-script\build-script\animejs\WebSharper.AnimeJs.Sample\WebSharper.AnimeJs.Sample.fsproj
-2023-11-23 16:48:11.2358|TRACE|Program|Server sends: e: WebSharper warning WS9002: Please use "spa" instead of "Bundle" for your project type
-2023-11-23 16:48:13.0596|TRACE|Program|Server sends: n: F# compilation: 00:00:01.8277353
-2023-11-23 16:48:14.1554|TRACE|Program|Server sends: n: Checking project: 00:00:01.0958297
-2023-11-23 16:48:14.1554|TRACE|Program|Server sends: n: Waiting on merged metadata: 00:00:00.0008509
-2023-11-23 16:48:14.4987|TRACE|Program|Server sends: n: Parsing with FCS: 00:00:00.3424309
-2023-11-23 16:48:14.5029|TRACE|Program|Server sends: n: Analyzing function arguments: 00:00:00.0042547
-2023-11-23 16:48:14.5623|TRACE|Program|Server sends: n: Resolving names: 00:00:00.0593807
-2023-11-23 16:48:14.7726|TRACE|Program|Server sends: n: WebSharper translation: 00:00:00.2102629
-2023-11-23 16:48:14.7956|TRACE|Program|Server sends: n: Source position transformations: 00:00:00.0230261
-2023-11-23 16:48:14.8476|TRACE|Program|Server sends: n: Packaging assembly: 00:00:00.0519470
-2023-11-23 16:48:14.9642|TRACE|Program|Server sends: n: Writing WebSharper.AnimeJs.Sample.Components.SVGMenu.Paths.js: 00:00:00.1166586
-2023-11-23 16:48:14.9642|TRACE|Program|Server sends: n: Writing WebSharper.AnimeJs.Sample.Components.SVGMenu.js: 00:00:00.0009251
-2023-11-23 16:48:14.9642|TRACE|Program|Server sends: n: Writing WebSharper.AnimeJs.Sample.Client.js: 00:00:00.0003946
-2023-11-23 16:48:14.9642|TRACE|Program|Server sends: n: Writing $Generated.js: 00:00:00.0003033
-2023-11-23 16:48:14.9642|TRACE|Program|Server sends: n: Writing $EntryPoint.js: 00:00:00.0003464
-2023-11-23 16:48:14.9942|TRACE|Program|Server sends: n: Writing .d.ts files: 00:00:00.0279922
-2023-11-23 16:48:14.9942|TRACE|Program|Server sends: n: Hashing resources: 00:00:00.0045226
-2023-11-23 16:48:15.1436|TRACE|Program|Server sends: n: Serializing metadata: 00:00:00.1448747
-2023-11-23 16:48:15.1945|TRACE|Program|Server sends: n: Writing resources into assembly: 00:00:00.0508617
-2023-11-23 16:48:15.3664|TRACE|Program|Server sends: n: Bundling: 00:00:00.1719802
-2023-11-23 16:48:15.3664|TRACE|Program|Server sends: x: 0
+2023-12-11 15:56:07.8692|DEBUG|Program|location of wsfscservice is: C:\Users\runneradmin\.nuget\packages\websharper.fsharp\7.0.6.386-beta4\tools\net6.0\win-x64 (server side)
+2023-12-11 15:56:07.8692|DEBUG|Program|pipename is: C:\Users\runneradmin\.nuget\packages\websharper.fsharp\7.0.6.386-beta4\tools\net6.0\win-x64 (server side)
+2023-12-11 15:56:07.8692|DEBUG|Program|Compiling D:\a\build-script\build-script\animejs\WebSharper.AnimeJs.Sample\WebSharper.AnimeJs.Sample.fsproj
+2023-12-11 15:56:07.8692|TRACE|Program|Server sends: e: WebSharper warning WS9002: Please use "spa" instead of "Bundle" for your project type
+2023-12-11 15:56:09.5667|TRACE|Program|Server sends: n: F# compilation: 00:00:01.7019925
+2023-12-11 15:56:10.5338|TRACE|Program|Server sends: n: Checking project: 00:00:00.9671286
+2023-12-11 15:56:10.5338|TRACE|Program|Server sends: n: Waiting on merged metadata: 00:00:00.0007727
+2023-12-11 15:56:10.8655|TRACE|Program|Server sends: n: Parsing with FCS: 00:00:00.3309000
+2023-12-11 15:56:10.8686|TRACE|Program|Server sends: n: Analyzing function arguments: 00:00:00.0031501
+2023-12-11 15:56:10.9251|TRACE|Program|Server sends: n: Resolving names: 00:00:00.0564354
+2023-12-11 15:56:11.1293|TRACE|Program|Server sends: n: WebSharper translation: 00:00:00.2042414
+2023-12-11 15:56:11.1527|TRACE|Program|Server sends: n: Source position transformations: 00:00:00.0233722
+2023-12-11 15:56:11.2029|TRACE|Program|Server sends: n: Packaging assembly: 00:00:00.0502205
+2023-12-11 15:56:11.3182|TRACE|Program|Server sends: n: Writing WebSharper.AnimeJs.Sample.Components.SVGMenu.Paths.js: 00:00:00.1152797
+2023-12-11 15:56:11.3182|TRACE|Program|Server sends: n: Writing WebSharper.AnimeJs.Sample.Components.SVGMenu.js: 00:00:00.0007990
+2023-12-11 15:56:11.3182|TRACE|Program|Server sends: n: Writing WebSharper.AnimeJs.Sample.Client.js: 00:00:00.0004774
+2023-12-11 15:56:11.3182|TRACE|Program|Server sends: n: Writing $Generated.js: 00:00:00.0003906
+2023-12-11 15:56:11.3182|TRACE|Program|Server sends: n: Writing $EntryPoint.js: 00:00:00.0003504
+2023-12-11 15:56:11.3529|TRACE|Program|Server sends: n: Writing .d.ts files: 00:00:00.0326982
+2023-12-11 15:56:11.3529|TRACE|Program|Server sends: n: Hashing resources: 00:00:00.0041513
+2023-12-11 15:56:11.4997|TRACE|Program|Server sends: n: Serializing metadata: 00:00:00.1426851
+2023-12-11 15:56:11.5483|TRACE|Program|Server sends: n: Writing resources into assembly: 00:00:00.0486098
+2023-12-11 15:56:11.7177|TRACE|Program|Server sends: n: Bundling: 00:00:00.1693148
+2023-12-11 15:56:11.7177|TRACE|Program|Server sends: x: 0
