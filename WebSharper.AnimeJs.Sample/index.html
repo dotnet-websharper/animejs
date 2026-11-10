@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebSharper.AnimeJs — sample</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%234f46e5'/%3E%3Cpath d='M9.5 2 4 9h3l-.8 5L12 7H9z' fill='white'/%3E%3C/svg%3E" />
+    <script>
+        // Apply a previously chosen theme before first paint. Light is the
+        // default; the key is shared with Client.fs (themeStorageKey).
+        try {
+            var t = localStorage.getItem('websharper-animejs-theme');
+            if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { }
+    </script>
     <link rel="stylesheet" href="site.css" />
     <!-- anime.js is bundled from the npm package; the WebSharper head is folded in here. -->
     <!-- ws-head -->
@@ -15,7 +23,12 @@
             <h1>WebSharper.AnimeJs</h1>
             <p>Anime.js bindings for F# — with <a href="https://websharper.com">WebSharper</a></p>
         </div>
-        <a class="app-source" href="https://github.com/dotnet-websharper/animejs">Source</a>
+        <div class="app-actions">
+            <button class="btn theme-toggle" ws-onclick="ToggleTheme" title="Switch between the light and dark theme">
+                <span>${themeLabel}</span>
+            </button>
+            <a class="app-source" href="https://github.com/dotnet-websharper/animejs">Source</a>
+        </div>
     </header>
 
     <main class="page">
