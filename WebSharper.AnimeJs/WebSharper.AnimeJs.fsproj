@@ -4,14 +4,14 @@
         <WebSharperProject>binding</WebSharperProject>
         <WebSharperSourceMap>false</WebSharperSourceMap>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Product>WebSharper.AnimeJs 3.2.1+</Product>
+        <Product>WebSharper.AnimeJs 4.5.0+</Product>
         <Title>https://github.com/dotnet-websharper/animejs/</Title>
         <Company>IntelliFactory</Company>
         <Copyright>(c) 2023 IntelliFactory</Copyright>
     </PropertyGroup>
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="animejs" Version="&gt;= 3.2.1 &lt; 4.0.0" ResolutionStrategy="Max" />
+            <NpmPackage Name="animejs" Version="&gt;= 4.5.0 &lt; 5.0.0" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
     <ItemGroup>

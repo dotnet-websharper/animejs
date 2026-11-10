@@ -224,6 +224,24 @@ code {
     stroke-linejoin: round;
 }
 
+.morph-target {
+    visibility: hidden;
+}
+
+.drag-stage {
+    position: relative;
+    min-height: 180px;
+    touch-action: none;
+}
+
+.drag-box {
+    cursor: grab;
+    background: #0ea5e9;
+    box-shadow: 0 10px 25px rgba(14, 165, 233, .35);
+}
+
+.drag-box:active { cursor: grabbing; }
+
 .readout {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
