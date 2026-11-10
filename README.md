@@ -25,7 +25,9 @@ This repository contains:
 The sample doubles as the binding's [test case](#running-the-test-case): it
 creates animations, a timeline, a staggered grid, morphs an SVG path with
 `PathValues`/`anime.path` and exercises the `anime.*` helpers (`random`, `get`,
-`set`, `remove`, `running`, `version` and `suspendWhenDocumentHidden`).
+`set`, `remove`, `running`, `version` and `suspendWhenDocumentHidden`). It is
+light-themed by default and has a light/dark theme switcher (persisted in
+`localStorage`).
 
 - **Sample (this repository):** <https://dotnet-websharper.github.io/animejs/>
 - **Source repository:** <https://github.com/dotnet-websharper/animejs>

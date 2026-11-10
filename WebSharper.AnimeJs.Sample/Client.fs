@@ -27,6 +27,12 @@ module Client =
     let suspend = Var.Create "-"
     let notice = Var.Create ""
 
+    // Theme: light is the default; the choice is persisted in localStorage.
+    // The storage key is shared with the bootstrap script in index.html.
+    let themeStorageKey = "websharper-animejs-theme"
+    let theme = Var.Create "light"
+    let themeLabel = Var.Create "🌙 Dark mode"
+
     let prefersReducedMotion =
         JS.Window.MatchMedia("(prefers-reduced-motion: reduce)").Matches
 
@@ -42,6 +48,20 @@ module Client =
     let byId (id: string) =
         let el = JS.Document.GetElementById id
         if isNull el then None else Some el
+
+    // ---------------------------------------------------------------
+    // Theme switcher
+    // ---------------------------------------------------------------
+
+    let applyTheme () =
+        JS.Document.DocumentElement.SetAttribute("data-theme", theme.Value)
+        themeLabel.Value <-
+            if theme.Value = "dark" then "☀️ Light mode" else "🌙 Dark mode"
+
+    let toggleTheme () =
+        theme.Value <- (if theme.Value = "dark" then "light" else "dark")
+        try JS.Window.LocalStorage.SetItem(themeStorageKey, theme.Value) with _ -> ()
+        applyTheme ()
 
     let withCore (f: Anime -> unit) =
         match core with
@@ -272,6 +292,13 @@ module Client =
             notice.Value <-
                 "Your system requests reduced motion; animations run only when you press a button."
 
+        // Restore a previously chosen theme (light is the default).
+        let savedTheme =
+            try JS.Window.LocalStorage.GetItem(themeStorageKey) with _ -> null
+        if savedTheme = "dark" || savedTheme = "light" then
+            theme.Value <- savedTheme
+        applyTheme ()
+
         // `.Bind()` renders the whole document body, so the elements below are
         // in the DOM only after this call.
         IndexTemplate()
@@ -283,6 +310,8 @@ module Client =
             .opacity(opacity.V)
             .random(random.V)
             .suspend(suspend.V)
+            .themeLabel(themeLabel.V)
+            .ToggleTheme(fun _ -> toggleTheme ())
             .MoveRight(fun _ -> moveRight ())
             .Spin(fun _ -> spin ())
             .FadeColor(fun _ -> fadeColor ())

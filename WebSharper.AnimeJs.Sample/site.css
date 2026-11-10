@@ -1,4 +1,27 @@
+/* Light is the default theme; `data-theme="dark"` on <html> switches to dark. */
 :root {
+    color-scheme: light;
+
+    --bg: #f6f7fb;
+    --panel: #ffffff;
+    --panel-2: #f1f5f9;
+    --line: #e4e7ee;
+    --text: #0f172a;
+    --muted: #64748b;
+    --accent: #4f46e5;
+    --accent-strong: #4338ca;
+    --accent-2: #0e7490;
+    --box-shadow: 0 10px 25px rgba(79, 70, 229, .30);
+    --header-gradient: linear-gradient(180deg, rgba(99, 102, 241, .10), transparent);
+    --notice-border: #d97706;
+    --notice-bg: #fef3c7;
+    --notice-text: #92400e;
+    --radius: 14px;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
     --bg: #0f172a;
     --panel: #111c34;
     --panel-2: #16233f;
@@ -6,8 +29,13 @@
     --text: #e2e8f0;
     --muted: #93a1bd;
     --accent: #6366f1;
+    --accent-strong: #4f46e5;
     --accent-2: #22d3ee;
-    --radius: 14px;
+    --box-shadow: 0 10px 25px rgba(79, 70, 229, .45);
+    --header-gradient: linear-gradient(180deg, rgba(99, 102, 241, .16), transparent);
+    --notice-border: #b45309;
+    --notice-bg: rgba(180, 83, 9, .15);
+    --notice-text: #fcd34d;
 }
 
 * { box-sizing: border-box; }
@@ -19,6 +47,7 @@ html, body {
     color: var(--text);
     font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.5;
+    transition: background-color .2s ease, color .2s ease;
 }
 
 a { color: var(--accent-2); }
@@ -30,7 +59,7 @@ a { color: var(--accent-2); }
     gap: 1rem;
     padding: 1.25rem 1.5rem;
     border-bottom: 1px solid var(--line);
-    background: linear-gradient(180deg, rgba(99, 102, 241, .16), transparent);
+    background: var(--header-gradient);
 }
 
 .app-titles h1 {
@@ -45,6 +74,12 @@ a { color: var(--accent-2); }
     font-size: .9rem;
 }
 
+.app-actions {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
 .app-source {
     font-size: .9rem;
     text-decoration: none;
@@ -55,6 +90,11 @@ a { color: var(--accent-2); }
 }
 
 .app-source:hover { border-color: var(--accent); }
+
+.theme-toggle {
+    border-radius: 999px;
+    padding: .4rem .8rem;
+}
 
 .page {
     max-width: 900px;
@@ -69,10 +109,10 @@ a { color: var(--accent-2); }
 .notice {
     margin: 0;
     padding: .6rem .9rem;
-    border: 1px solid #b45309;
-    background: rgba(180, 83, 9, .15);
+    border: 1px solid var(--notice-border);
+    background: var(--notice-bg);
     border-radius: 10px;
-    color: #fcd34d;
+    color: var(--notice-text);
     font-size: .9rem;
 }
 
@@ -119,7 +159,7 @@ code {
     height: 56px;
     border-radius: 12px;
     background: #4f46e5;
-    box-shadow: 0 10px 25px rgba(79, 70, 229, .45);
+    box-shadow: var(--box-shadow);
 }
 
 .box2 { background: #0ea5e9; border-radius: 50%; }
@@ -150,10 +190,10 @@ code {
 .btn-primary {
     background: var(--accent);
     border-color: var(--accent);
-    color: white;
+    color: #ffffff;
 }
 
-.btn-primary:hover { background: #4f46e5; }
+.btn-primary:hover { background: var(--accent-strong); }
 
 .dots {
     display: grid;
