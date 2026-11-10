@@ -8,7 +8,6 @@ storage: none
 
 nuget WebSharper prerelease
 nuget WebSharper.FSharp prerelease
-nuget WebSharper.Testing prerelease
 nuget WebSharper.UI prerelease
 
 group wsbuild

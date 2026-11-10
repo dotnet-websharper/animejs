@@ -1,34 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0</TargetFrameworks>
-        <WebSharperProject>Bundle</WebSharperProject>
-        <WebSharperBundleOutputDir>Content</WebSharperBundleOutputDir>
-        <WebSharperSourceMap>false</WebSharperSourceMap>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <WebSharperSourceMap>false</WebSharperSourceMap>
+  </PropertyGroup>
 
-    <ItemGroup>
-		<None Include="vite.config.js" />
-		<Content Include="index.html" />
-		<Content Include="svgmenu.html" />
-		<Compile Include="Components/SVGMenu.fs" />
-        <Compile Include="Client.fs" />
-	    
-    </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client.fs" />
+    <None Include="package.json" />
+    <None Include="esbuild.config.mjs" />
+    <None Include="wsconfig.json" />
+    <Content Include="index.html" />
+    <Content Include="site.css" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="WebSharper.Core" Version="7.0.1.330-beta2" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebSharper.AnimeJs\WebSharper.AnimeJs.fsproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\WebSharper.AnimeJs\WebSharper.AnimeJs.fsproj" />
-    </ItemGroup>
+  <Target Name="ESBuildBundle" AfterTargets="WebSharperCompile">
+    <Exec Command="npm install" />
+    <Exec Command="node ./esbuild.config.mjs" />
+  </Target>
 
-    <ItemGroup>
-      <Folder Include="Components\" />
-    </ItemGroup>
-    <Import Project="..\paket-files\wsbuild\github.com\dotnet-websharper\build-script\WebSharper.Fake.targets" Condition="Exists('..\paket-files\wsbuild\github.com\dotnet-websharper\build-script\WebSharper.Fake.targets')" />
-    <Import Project="..\.paket\Paket.Restore.targets" />
+  <Import Project="..\paket-files\wsbuild\github.com\dotnet-websharper\build-script\WebSharper.Fake.targets" Condition="Exists('..\paket-files\wsbuild\github.com\dotnet-websharper\build-script\WebSharper.Fake.targets')" />
+  <Import Project="..\.paket\Paket.Restore.targets" />
 
 </Project>
