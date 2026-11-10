@@ -21,7 +21,7 @@
     <header class="app-header">
         <div class="app-titles">
             <h1>WebSharper.AnimeJs</h1>
-            <p>Anime.js bindings for F# — with <a href="https://websharper.com">WebSharper</a></p>
+            <p>Anime.js 4 bindings for F# — with <a href="https://websharper.com">WebSharper</a></p>
         </div>
         <div class="app-actions">
             <button class="btn theme-toggle" ws-onclick="ToggleTheme" title="Switch between the light and dark theme">
@@ -38,7 +38,7 @@
             <header class="card-header">
                 <h2>Core animation</h2>
                 <p>
-                    A single <code>anime()</code> instance driving transforms, colour,
+                    A single <code>animate()</code> instance driving transforms, colour,
                     opacity and looping. The transport buttons act on the instance
                     created by the buttons on the left.
                 </p>
@@ -50,13 +50,16 @@
                 <button class="btn btn-primary" ws-onclick="MoveRight">Translate &amp; scale</button>
                 <button class="btn" ws-onclick="Spin">Rotate</button>
                 <button class="btn" ws-onclick="FadeColor">Opacity &amp; colour</button>
-                <button class="btn" ws-onclick="Loop">Loop alternate</button>
+                <button class="btn" ws-onclick="Loop">Spring loop</button>
                 <span class="spacer"></span>
                 <button class="btn" ws-onclick="Play">Play</button>
                 <button class="btn" ws-onclick="Pause">Pause</button>
                 <button class="btn" ws-onclick="Restart">Restart</button>
                 <button class="btn" ws-onclick="Reverse">Reverse</button>
+                <button class="btn" ws-onclick="Alternate">Alternate</button>
                 <button class="btn" ws-onclick="Seek">Seek 50%</button>
+                <button class="btn" ws-onclick="Cancel">Cancel</button>
+                <button class="btn" ws-onclick="Revert">Revert</button>
             </div>
             <p class="status">${details}</p>
         </section>
@@ -65,7 +68,7 @@
             <header class="card-header">
                 <h2>Timeline</h2>
                 <p>
-                    <code>anime.timeline()</code> with several sequenced
+                    <code>createTimeline()</code> with several sequenced
                     <code>.add()</code> steps and relative time offsets.
                 </p>
             </header>
@@ -83,8 +86,8 @@
             <header class="card-header">
                 <h2>Stagger</h2>
                 <p>
-                    <code>anime.stagger()</code> spreads the delay across the grid;
-                    the origin is chosen with <code>StaggerOptions</code>.
+                    <code>stagger()</code> spreads the delay across the grid; the origin
+                    is chosen with <code>StaggerParams</code>.
                 </p>
             </header>
             <div id="dots" class="dots">
@@ -101,20 +104,32 @@
 
         <section class="card">
             <header class="card-header">
-                <h2>SVG path</h2>
+                <h2>SVG</h2>
                 <p>
-                    <code>PathValues</code> morphs the <code>d</code> attribute, while
-                    <code>anime.path()</code> reads points along the current shape.
+                    <code>svg.createDrawable()</code> animates the <code>draw</code>
+                    attribute, while <code>svg.morphTo()</code> morphs the path's
+                    <code>d</code> attribute.
                 </p>
             </header>
             <div class="stage">
                 <svg viewBox="0 0 200 120" class="morph">
                     <path id="morph-path" d="M10,60 C10,10 190,10 190,60 C190,110 10,110 10,60 Z"></path>
+                    <path id="morph-target" class="morph-target" d="M10,60 C10,10 190,10 190,60 C190,110 10,110 10,60 Z"></path>
                 </svg>
             </div>
             <div class="toolbar">
-                <button class="btn btn-primary" ws-onclick="Morph">Morph shape</button>
-                <button class="btn" ws-onclick="ProbePath">Probe path point</button>
+                <button class="btn btn-primary" ws-onclick="Draw">Draw</button>
+                <button class="btn" ws-onclick="Morph">Morph shape</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>Draggable</h2>
+                <p><code>createDraggable()</code> makes the box draggable inside its stage.</p>
+            </header>
+            <div id="drag-stage" class="stage drag-stage">
+                <div id="drag-box" class="box drag-box"></div>
             </div>
         </section>
 
@@ -122,23 +137,26 @@
             <header class="card-header">
                 <h2>Helpers &amp; API tour</h2>
                 <p>
-                    The rest of the <code>anime.*</code> namespace: <code>random</code>,
-                    <code>get</code>, <code>set</code>, <code>remove</code>,
-                    <code>running</code>, <code>version</code> and
-                    <code>suspendWhenDocumentHidden</code>.
+                    The rest of the <code>animejs</code> namespace: <code>get</code>,
+                    <code>set</code>, <code>remove</code>, <code>random</code>,
+                    <code>utils</code>, <code>eases</code>, <code>cubicBezier</code>,
+                    <code>spring</code> and <code>engine</code>.
                 </p>
             </header>
             <dl class="readout">
-                <div><dt>anime.version</dt><dd>${version}</dd></div>
-                <div><dt>anime.running.length</dt><dd>${running}</dd></div>
-                <div><dt>anime.get(box, "opacity")</dt><dd>${opacity}</dd></div>
+                <div><dt>engine.timeUnit · precision</dt><dd>${engine}</dd></div>
                 <div><dt>anime.random(1, 100)</dt><dd>${random}</dd></div>
-                <div><dt>anime.suspendWhenDocumentHidden</dt><dd>${suspend}</dd></div>
+                <div><dt>utils.clamp(1.5, 0, 1)</dt><dd>${clamp}</dd></div>
+                <div><dt>get(box, "opacity")</dt><dd>${opacity}</dd></div>
+                <div><dt>eases.outQuad(0.5)</dt><dd>${eases}</dd></div>
+                <div><dt>cubicBezier(...)(0.5)</dt><dd>${cubicBezier}</dd></div>
+                <div><dt>spring.solve(0.5)</dt><dd>${spring}</dd></div>
             </dl>
             <div class="toolbar">
-                <button class="btn" ws-onclick="Read">Read get / running</button>
+                <button class="btn" ws-onclick="Read">Read get / engine</button>
                 <button class="btn" ws-onclick="SetHalf">Set opacity 0.5</button>
                 <button class="btn" ws-onclick="RemoveAll">Remove animations</button>
+                <button class="btn" ws-onclick="AnimatableX">Animatable x</button>
             </div>
             <p class="status">${status}</p>
         </section>
