@@ -11,7 +11,7 @@
     </PropertyGroup>
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="animejs" Version="gt= 3.2.1 lt 4.0.0" ResolutionStrategy="Max" />
+            <NpmPackage Name="animejs" Version="&gt;= 3.2.1 &lt; 4.0.0" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
     <ItemGroup>
