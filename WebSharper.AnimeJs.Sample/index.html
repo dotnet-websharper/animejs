@@ -1,40 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>WebSharper.AnimeJs Sample Page</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="Content/WebSharper.AnimeJs.Sample.css" />
-    <link rel="stylesheet" type="text/css" href="svgboxopen.css" />
-    <link rel="stylesheet" type="text/css" href="svgmenu.css" />
-    <style>
-        /* Don't show the not-yet-loaded templates */
-        [ws-template], [ws-children-template] { display: none; }
-        .box {
-            background-color: #000000; 
-            margin: 1px; 
-            font-size: 14px; 
-            width:20px; 
-            height:20px; 
-            position: relative;
-        }
-
-    </style>
-    <script type="module" src="Content/WebSharper.AnimeJs.Sample.head.js"></script>
+    <title>WebSharper.AnimeJs — sample</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%234f46e5'/%3E%3Cpath d='M9.5 2 4 9h3l-.8 5L12 7H9z' fill='white'/%3E%3C/svg%3E" />
+    <script>
+        // Apply a previously chosen theme before first paint. Light is the
+        // default; the key is shared with Client.fs (themeStorageKey).
+        try {
+            var t = localStorage.getItem('websharper-animejs-theme');
+            if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { }
+    </script>
+    <link rel="stylesheet" href="site.css" />
+    <!-- anime.js is bundled from the npm package; the WebSharper head is folded in here. -->
+    <!-- ws-head -->
 </head>
 <body>
-    <!--<h1>WebSharper.AnimeJs Sample Page</h1>-->
-    <!--<h2>Note: Translate works on local axis</h2>-->
-    
-    <div id="main">
-    </div>
-    <div id="demo1">
-        <div id="box1" class="box"></div>
-        <svg>
-            <polygon id="box2" stroke="black" fill="red" transform="translate(50,0)" points="0,0 0,5 5,5 5,0"></polygon>
-        </svg>
-    </div>
-    <script type="module" src="Content/WebSharper.AnimeJs.Sample.js"></script>
+    <header class="app-header">
+        <div class="app-titles">
+            <h1>WebSharper.AnimeJs</h1>
+            <p>Anime.js bindings for F# — with <a href="https://websharper.com">WebSharper</a></p>
+        </div>
+        <div class="app-actions">
+            <button class="btn theme-toggle" ws-onclick="ToggleTheme" title="Switch between the light and dark theme">
+                <span>${themeLabel}</span>
+            </button>
+            <a class="app-source" href="https://github.com/dotnet-websharper/animejs">Source</a>
+        </div>
+    </header>
+
+    <main class="page">
+        <p class="notice">${notice}</p>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>Core animation</h2>
+                <p>
+                    A single <code>anime()</code> instance driving transforms, colour,
+                    opacity and looping. The transport buttons act on the instance
+                    created by the buttons on the left.
+                </p>
+            </header>
+            <div class="stage">
+                <div id="box" class="box"></div>
+            </div>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="MoveRight">Translate &amp; scale</button>
+                <button class="btn" ws-onclick="Spin">Rotate</button>
+                <button class="btn" ws-onclick="FadeColor">Opacity &amp; colour</button>
+                <button class="btn" ws-onclick="Loop">Loop alternate</button>
+                <span class="spacer"></span>
+                <button class="btn" ws-onclick="Play">Play</button>
+                <button class="btn" ws-onclick="Pause">Pause</button>
+                <button class="btn" ws-onclick="Restart">Restart</button>
+                <button class="btn" ws-onclick="Reverse">Reverse</button>
+                <button class="btn" ws-onclick="Seek">Seek 50%</button>
+            </div>
+            <p class="status">${details}</p>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>Timeline</h2>
+                <p>
+                    <code>anime.timeline()</code> with several sequenced
+                    <code>.add()</code> steps and relative time offsets.
+                </p>
+            </header>
+            <div class="stage">
+                <div id="box2" class="box box2"></div>
+            </div>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="RunTimeline">Play timeline</button>
+                <button class="btn" ws-onclick="PauseTimeline">Pause</button>
+                <button class="btn" ws-onclick="RestartTimeline">Restart</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>Stagger</h2>
+                <p>
+                    <code>anime.stagger()</code> spreads the delay across the grid;
+                    the origin is chosen with <code>StaggerOptions</code>.
+                </p>
+            </header>
+            <div id="dots" class="dots">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="StaggerIn">Stagger in (from first)</button>
+                <button class="btn" ws-onclick="StaggerOut">Stagger out (from last)</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>SVG path</h2>
+                <p>
+                    <code>PathValues</code> morphs the <code>d</code> attribute, while
+                    <code>anime.path()</code> reads points along the current shape.
+                </p>
+            </header>
+            <div class="stage">
+                <svg viewBox="0 0 200 120" class="morph">
+                    <path id="morph-path" d="M10,60 C10,10 190,10 190,60 C190,110 10,110 10,60 Z"></path>
+                </svg>
+            </div>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="Morph">Morph shape</button>
+                <button class="btn" ws-onclick="ProbePath">Probe path point</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>Helpers &amp; API tour</h2>
+                <p>
+                    The rest of the <code>anime.*</code> namespace: <code>random</code>,
+                    <code>get</code>, <code>set</code>, <code>remove</code>,
+                    <code>running</code>, <code>version</code> and
+                    <code>suspendWhenDocumentHidden</code>.
+                </p>
+            </header>
+            <dl class="readout">
+                <div><dt>anime.version</dt><dd>${version}</dd></div>
+                <div><dt>anime.running.length</dt><dd>${running}</dd></div>
+                <div><dt>anime.get(box, "opacity")</dt><dd>${opacity}</dd></div>
+                <div><dt>anime.random(1, 100)</dt><dd>${random}</dd></div>
+                <div><dt>anime.suspendWhenDocumentHidden</dt><dd>${suspend}</dd></div>
+            </dl>
+            <div class="toolbar">
+                <button class="btn" ws-onclick="Read">Read get / running</button>
+                <button class="btn" ws-onclick="SetHalf">Set opacity 0.5</button>
+                <button class="btn" ws-onclick="RemoveAll">Remove animations</button>
+            </div>
+            <p class="status">${status}</p>
+        </section>
+    </main>
+
+    <script type="text/javascript" src="Scripts/WebSharper.AnimeJs.Sample.min.js"></script>
 </body>
 </html>
-

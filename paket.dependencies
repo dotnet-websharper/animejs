@@ -8,7 +8,6 @@ storage: none
 
 nuget WebSharper ~> 10.0
 nuget WebSharper.FSharp ~> 10.0
-nuget WebSharper.Testing ~> 10.0
 nuget WebSharper.UI ~> 10.0
 
 group wsbuild
