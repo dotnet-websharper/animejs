@@ -6,6 +6,6 @@
     "esbuild": "^0.19.9"
   },
   "dependencies": {
-    "animejs": "^3.2.1"
+    "animejs": "^4.5.0"
   }
 }
