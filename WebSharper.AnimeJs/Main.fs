@@ -25,13 +25,23 @@ module Definition =
         "attribute";"transform";"css";"object"
     ]
     
+    let Animatable =
+        AbstractClass "Animatable"
+        |+> Instance [
+            "id" =? T<int>
+            "target" =? T<JavaScript.Dom.Node>
+            "total" =? T<int>
+            "transforms" =? T<obj>
+        ]
+    
     let Animation =
         AbstractClass "Animation"
         |+> Instance [
             "type" =? AnimationType
             "property" =? T<string>
-            "animatable" =? T<bool>
+            "animatable" =? Animatable
             "tweens" =? !|Tween
+            "currentValue" =? T<string>
             "duration" =? T<float>
             "delay" =? T<float>
             "endDelay" =? T<float>
@@ -431,6 +441,10 @@ module Definition =
     ]
     let Axis = Pattern.EnumStrings "Axis" ["x";"y"]
     
+    let targetType = T<string> + T<JavaScript.Dom.Node> + T<obj>
+    let functionBased =
+        targetType?target * (!?T<int>)?index * (!?T<int>)?targetsLength ^-> T<float>
+    
     let StaggerOptions =
         Pattern.Config "StaggerOptions" {
             Required = []
@@ -448,7 +462,7 @@ module Definition =
         
     let Stagger = Method "Stagger" (
         ((T<int> + (T<int>*T<int>)) + T<float> + T<string> + T<JavaScript.Array>)?value
-            * (!?StaggerOptions) ^-> T<unit>
+            * (!?StaggerOptions) ^-> functionBased
         )
     Anime
     |+> Static [
@@ -457,15 +471,13 @@ module Definition =
     |> ignore
     
     
-    let targetType = T<string> + T<JavaScript.Dom.Node> + T<obj>
     let PathValues = 
         Class "PathValues"
         |+> Static [
             ObjectConstructor (T<string> + (!|T<string>))?value
         ]
     let commonParams = [
-                let functionBased = targetType?target * (!?T<int>)?index * (!?T<int>)?targetsLength ^-> T<int>
-                let numericParam = T<int> + Stagger.Type + functionBased
+                let numericParam = T<float> + T<int> + functionBased
                 // property parameters
                 for n in ["duration";"delay";"endDelay"] do
                     n, numericParam
@@ -490,8 +502,8 @@ module Definition =
                 
                 // callbacks & promises
                 for n in ["update";"begin";"complete";"loopBegin";"loopComplete";"changeBegin";"changeComplete"] do
-                    n, Animation?anim ^-> T<unit> // TODO Anim object
-                "change", (!?Animation?anim) ^-> T<unit>
+                    n, Anime?anim ^-> T<unit>
+                "change", (!?Anime?anim) ^-> T<unit>
                     
             ]
     let AnimeParams = 
@@ -540,12 +552,58 @@ module Definition =
     
     let PathOptions = Pattern.EnumStrings "PathOptions" ["x";"y";"angle"]
     
-    let Path = Method "Path" (PathOptions ^-> T<float>)
+    let PathTarget =
+        Pattern.Config "PathTarget" {
+            Required = [
+                "el", T<JavaScript.Dom.Node>
+                "property", T<string>
+                "totalLength", T<float>
+            ]
+            Optional = []
+        }
+    let PathFunction = PathOptions ^-> PathTarget
+    let Path = Method "Path" ((T<string> + T<JavaScript.Dom.Node>)?path * (!?T<float>)?percent ^-> PathFunction)
     Anime
     |+> Static [
-        "path" => T<string> ^-> Path.Type
+        "path" => Path.Type
     ]
     |> ignore
+    
+    // The `anime.*` helper namespace (as shipped by anime.js 3.2.x).
+    Anime
+    |+> Static [
+        "version" =? T<string>
+        "speed" =? T<float>
+        "suspendWhenDocumentHidden" =? T<bool>
+        "running" =? !|Anime
+        "remove" => targetType ^-> T<unit>
+        "get" => targetType?target * T<string>?property * (!?T<string>)?unit ^-> T<string>
+        "set" => targetType?target * (!?TimelineParams)?value ^-> T<unit>
+        "setDashoffset" => T<JavaScript.Dom.Node> ^-> T<float>
+        "random" => T<float>?min * T<float>?max ^-> T<float>
+    ]
+    |> ignore
+    
+    // `AnimeInstance` state, shared by `Anime` and `Timeline`.
+    let instanceMembers : CodeModel.IClassMember list = [
+        "tick" => T<float> ^-> T<unit>
+        "began" =? T<bool>
+        "paused" =? T<bool>
+        "completed" =? T<bool>
+        "finished" =? T<JavaScript.Promise<unit>>
+        "autoplay" =? T<bool>
+        "currentTime" =? T<float>
+        "direction" =? Direction
+        "loop" =? (T<bool> + T<int>)
+        "timelineOffset" =? T<float>
+        "progress" =? T<float>
+        "remaining" =? T<float>
+        "reversed" =? T<bool>
+        "animatables" =? !|Animatable
+        "animations" =? !|Animation
+    ]
+    Anime |+> Instance instanceMembers |> ignore
+    Timeline |+> Instance instanceMembers |> ignore
     
     
     let Assembly =
@@ -553,6 +611,7 @@ module Definition =
             Namespace "WebSharper.AnimeJs" [
                 Tween
                 AnimationType
+                Animatable
                 Animation
                 
                 Direction
@@ -565,6 +624,7 @@ module Definition =
                 StaggerOptions
                 
                 PathOptions
+                PathTarget
                 PathValues
                 
                 TimelineParams
