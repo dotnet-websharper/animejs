@@ -10,7 +10,7 @@ licenseUrl https://github.com/dotnet-websharper/animejs/blob/master/LICENSE.md
 iconUrl https://github.com/dotnet-websharper/core/raw/websharper50/tools/WebSharper.png
 projectUrl https://github.com/dotnet-websharper/animejs
 description
-    WebSharper bindings for AnimeJs 3.2.1+
+    WebSharper bindings for AnimeJs 3.x (3.2.1+)
 tags
     Web JavaScript F# C#
 files

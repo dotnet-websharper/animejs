@@ -2,8 +2,8 @@
 
 [![NuGet](https://img.shields.io/nuget/v/WebSharper.AnimeJs.svg)](https://www.nuget.org/packages/WebSharper.AnimeJs)
 
-WebSharper bindings for [anime.js](https://animejs.com/) 3.2.x — the lightweight
-JavaScript animation engine — for F# and C# web apps.
+WebSharper bindings for [anime.js](https://animejs.com/) 3.x (3.2.1+) — the
+lightweight JavaScript animation engine — for F# and C# web apps.
 
 The binding consumes the npm package [`animejs`](https://www.npmjs.com/package/animejs)
 as an ES module (`import anime from "animejs/lib/anime.es.js"`) and is bundled by
@@ -46,8 +46,9 @@ nuget WebSharper.AnimeJs
 ```
 
 The package targets `netstandard2.0` and works with any WebSharper 10 or 11
-project. anime.js itself is pulled from npm (`animejs`), so the JS bundle step
-must resolve it (WebSharper's SPA/esbuild build does this automatically).
+project. It supports anime.js `>= 3.2.1 < 4.0.0` (the 3.x line); anime.js itself
+is pulled from npm (`animejs`), so the JS bundle step must resolve it
+(WebSharper's SPA/esbuild build does this automatically).
 
 ## Usage
 
