@@ -425,7 +425,7 @@ module Definition =
     let transformParam = T<float> + (T<float> * T<float>) + T<string> + (T<string> * T<string>)
     let PropertyParameter = Pattern.Config "PropertyParameter" {
         Required = [
-            "value", transformParam
+            ("value", transformParam)
         ]
         Optional = [
             "delay", T<float>
@@ -509,7 +509,7 @@ module Definition =
     let AnimeParams = 
         Pattern.Config "AnimeParams" {
             Required = [
-                "targets", targetType + (!|T<JavaScript.Dom.Node>) + T<JavaScript.Array>
+                ("targets", targetType + (!|T<JavaScript.Dom.Node>) + T<JavaScript.Array>)
             ]
             Optional =  [
                 yield! commonParams
